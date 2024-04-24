@@ -14,9 +14,9 @@ suite('Functional Tests', function() {
          .end((err, res) => {
             console.log(JSON.parse(res.text));
             assert.equal(JSON.parse(res.text), {
-                initNum: '10',
+                initNum: 10,
                 initUnit: 'L',
-                returnNum: '2.64172',
+                returnNum: 2.64172,
                 returnUnit: 'gal',
                 string: "10 liters converts to 2.64172 gallons"
             })

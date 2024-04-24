@@ -58,7 +58,7 @@ function ConvertHandler() {
         if (Number.isNaN(matches[0])) {
           throwInvalid(validUnit);
         } else {
-          return matches[0];
+          return Number.parseFloat(matches[0]);
         }
         
       }
@@ -68,15 +68,22 @@ function ConvertHandler() {
   };
   
   this.getUnit = function(input) {
+    let result;
 
     const matches = input.match(/([a-zA-Z]*)$/);
 
     if (!matches) {
       throw new Error('invalid unit');
     } else if (matches[0] != 'l' && matches[0] != 'L'){
-      return matches[0].toLowerCase();
+      result = matches[0].toLowerCase();
     } else {
-      return matches[0].toUpperCase();
+      result = matches[0].toUpperCase();
+    }
+
+    if (!units.hasOwnProperty(result)) {
+      throw new Error('invalid unit');
+    } else {
+      return result;
     }
     
   };
@@ -133,7 +140,7 @@ function ConvertHandler() {
         throw new Error('invalid unit');
      }
     
-    return result.toFixed(5);
+    return Number.parseFloat(result.toFixed(5));
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
